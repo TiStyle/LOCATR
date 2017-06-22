@@ -2,7 +2,8 @@
 
 // CENTRAL STYLING
 html{
-    // background-color:$background-color;
+    // background-color: $background-color;
+    background-color: #1a1a1a;
     color: $primary-text-color;
     font-size:16px;
     height:100%;
@@ -13,23 +14,6 @@ html{
     @media only screen and (max-width : $container + 47){
         overflow-x: hidden;
     }
-    &:after{
-        background-position: 70vw 60vh;
-        background-repeat: no-repeat;
-        background-size: 500px 500px;
-        content: ' ';
-        height: 100vh;
-        left: 0;
-        opacity: .1;
-        position: fixed;
-        top: 0;
-        width: 100vw;
-        z-index: -1;
-        @media #{$small-and-down}{
-            background-position: 60vw 60vh;
-            background-size: 350px;
-        }
-    }
     body{
         padding:0;
         margin: 0;
@@ -37,47 +21,12 @@ html{
     }
 }
 
-// CONTAINERS
-header{
-    height: $header-height;
-    position: relative;
-    background-color: transparentize($primary-color, .25);
-    &.card{
-        padding: 0;
-        @media #{$small-and-down}{
-            margin-top: $spacing * 5;
-            margin-left: 0;
-            margin-right: 0;
-            width: 100%;
-        }
-    }
-    picture{
-        display: block;
-        height: 100vh;
-        max-height: 126px;
-        @media #{$small-and-down}{
-            max-height: 103px;
-        }
-        img{
-            display: table;
-            margin: 0 auto;
-            max-width: 20rem;
-            padding: $spacing 0;
-            @media #{$small-and-down}{
-                max-width: 15rem;
-            }
-        }
-    }
-}
 .main-container{
-    display: table;
-    height:100%;
+    background-color: $container-color;
     margin:0 auto;
-    margin-bottom: -3rem;
     max-width: $container;
     min-height:100%;
     position: relative;
-    top: -3rem;
     width: 100%;
 }
 
@@ -101,17 +50,37 @@ $head-number: 5;
 
 
 // PARAGRAPHS
-
+.intro-text{
+    // background-color: #273a40;
+    box-sizing: border-box;
+    color: #273a40;
+    display: table;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 0 auto;
+    padding: #{$spacing * 3} 15%;
+    width: 100%;
+}
 
 // IMAGES
-
+.logo-container{
+    background-color: $background-color;
+    width:100%;
+}
+.logo{
+    display: table;
+    margin: 0 auto;
+    width: 15rem;
+}
 
 // LISTS
 ul{
+    font-size: .75rem;
     margin: #{$spacing / 2} 0;
     padding: 0;
     li{
         list-style: none;
+        padding: 0 #{$padding / 2};
     }
 }
 
