@@ -57,7 +57,7 @@ gulp.task('scss', function () {
             cascade: false
         }))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('.'));
+        .pipe(gulp.dest('wwwroot/css/'));
 });
 
 gulp.task('watch', function () {
