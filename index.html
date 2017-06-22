@@ -50,19 +50,19 @@
 
           <div id="filterChoices" class="choices">
               <label class="input-checkbox" for="check1">
-                  <input type="checkbox" id="check1" value="TypeA" onchange="filter(this);"/>
+                  <input type="checkbox" id="check1" value="Kantoor" onchange="filter(this);"/>
                   <div class="checkbox"></div>
-                  Type A
+                  Kantoor
               </label>
               <label class="input-checkbox" for="check2">
-                  <input type="checkbox" id="check2" value="TypeB" onchange="filter(this);"/>
+                  <input type="checkbox" id="check2" value="Verkooppunten" onchange="filter(this);"/>
                   <div class="checkbox"></div>
-                  Type B
+                  Verkooppunten
               </label>
               <label class="input-checkbox" for="check3">
-                  <input type="checkbox" id="check3" value="TypeC" onchange="filter(this);"/>
+                  <input type="checkbox" id="check3" value="Distributie Centra" onchange="filter(this);"/>
                   <div class="checkbox"></div>
-                  Type C
+                  Distributie Centra
               </label>
               <a href="#" class="secondary-action reset" onclick="filter(this);">Reset filters</a>
           </div>
@@ -261,6 +261,7 @@
             if(!bool){
               markers.setMap(null);
               markerCluster.removeMarker(markers);
+              console.log('ye');
             } else {
               markers.setMap(map);
               markerCluster.addMarker(markers);
@@ -273,6 +274,7 @@
             markerCluster.removeMarker(markers);
             markers.setMap(map);
             markerCluster.addMarker(markers);
+              console.log('ye');
           });
         }
 
