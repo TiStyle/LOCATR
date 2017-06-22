@@ -22,7 +22,7 @@ html{
 }
 
 .main-container{
-    background-color: $container-color;
+    background-color: $background-color;
     margin:0 auto;
     max-width: $container;
     min-height:100%;
@@ -51,7 +51,6 @@ $head-number: 5;
 
 // PARAGRAPHS
 .intro-text{
-    // background-color: #273a40;
     box-sizing: border-box;
     color: #273a40;
     display: table;
@@ -64,7 +63,6 @@ $head-number: 5;
 
 // IMAGES
 .logo-container{
-    background-color: $background-color;
     width:100%;
 }
 .logo{
