@@ -1,0 +1,125 @@
+@import '_config';
+
+// CENTRAL STYLING
+html{
+    // background-color:$background-color;
+    color: $primary-text-color;
+    font-size:16px;
+    height:100%;
+    line-height: 24px;
+    margin: 0;
+    min-height:100%;
+    padding:0;
+    @media only screen and (max-width : $container + 47){
+        overflow-x: hidden;
+    }
+    &:after{
+        background-position: 70vw 60vh;
+        background-repeat: no-repeat;
+        background-size: 500px 500px;
+        content: ' ';
+        height: 100vh;
+        left: 0;
+        opacity: .1;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        z-index: -1;
+        @media #{$small-and-down}{
+            background-position: 60vw 60vh;
+            background-size: 350px;
+        }
+    }
+    body{
+        padding:0;
+        margin: 0;
+        font-family: $font-family;
+    }
+}
+
+// CONTAINERS
+header{
+    height: $header-height;
+    position: relative;
+    background-color: transparentize($primary-color, .25);
+    &.card{
+        padding: 0;
+        @media #{$small-and-down}{
+            margin-top: $spacing * 5;
+            margin-left: 0;
+            margin-right: 0;
+            width: 100%;
+        }
+    }
+    picture{
+        display: block;
+        height: 100vh;
+        max-height: 126px;
+        @media #{$small-and-down}{
+            max-height: 103px;
+        }
+        img{
+            display: table;
+            margin: 0 auto;
+            max-width: 20rem;
+            padding: $spacing 0;
+            @media #{$small-and-down}{
+                max-width: 15rem;
+            }
+        }
+    }
+}
+.main-container{
+    display: table;
+    height:100%;
+    margin:0 auto;
+    margin-bottom: -3rem;
+    max-width: $container;
+    min-height:100%;
+    position: relative;
+    top: -3rem;
+    width: 100%;
+}
+
+
+// HEADINGS
+$head-number: 5;
+
+@while $head-number > 0{
+    h#{$head-number}{
+        color: $primary-text-color;
+        font-size: 1rem + (2rem / $head-number);
+        line-height: ((1rem + (2rem / $head-number)) * $golden-ratio );
+        font-weight:normal;
+        margin: 0;
+    }
+    $head-number: $head-number - 1;
+}
+
+
+// SEE ALL
+
+
+// PARAGRAPHS
+
+
+// IMAGES
+
+
+// LISTS
+ul{
+    margin: #{$spacing / 2} 0;
+    padding: 0;
+    li{
+        list-style: none;
+    }
+}
+
+// FOOTER
+footer{
+    position: relative;
+    max-width: $container;
+    width: 100%;
+    display: table;
+    margin:0 auto;
+}

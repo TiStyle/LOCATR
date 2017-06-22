@@ -1,0 +1,61 @@
+@import '../../sass/_config';
+
+$panel-width: 15rem;
+
+
+.panel{
+    background-color: transparentize($container-color, .1);
+    box-shadow: 0 0 1rem 0rem rgba(0, 0, 0, 0.35);
+    height: 100%;
+    max-width: $panel-width;
+    position: absolute;
+    top: 0;
+    width:100%;
+    z-index: 9999;
+    &.location-info{
+        .icon{
+            background-color: transparent;
+            right: 0;
+        }
+    }
+    .icon{
+        align-items: center;
+        background-color: transparentize($container-color, .1);
+        border-bottom-right-radius: .25rem;
+        display: flex;
+        cursor: pointer;
+        height: 3rem;
+        justify-content: center;
+        position: absolute;
+        right: -1.4rem;
+        width: 1.4rem;
+        &:hover{
+            background-color: $container-color;
+        }
+    }
+    h5{
+        box-sizing: border-box;
+        padding: 0 $padding;
+        margin: .35rem 0;
+    }
+    &.left,
+    &.right{
+        &.open{
+            transform: translateX(0);
+            transition: .3s transform cubic-bezier(0.77, 0, 0.175, 1);
+        }
+    }
+    &.left{
+        left: 0;
+        float: left;
+        transform: translateX(-$panel-width);
+        transition: .3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        
+    }
+    &.right{
+        right: 0;
+        float: right;
+        transform: translateX($panel-width);
+        transition: .3s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+}

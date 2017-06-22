@@ -1,0 +1,104 @@
+@import '_config';
+
+// Grid Classes
+.col{
+    margin: $spacing / 2;
+    @while $grid-number > 0 {
+        @each $size, $query in      (s, $small-and-down),
+                                    (m, $medium-only),
+                                    (l, $large-and-up) {
+            @media #{$query} {
+                &.#{$size}#{$grid-number} {
+                    min-height: 1rem;
+                    // .1px compensation for IE11
+                    width: calc((100% / (#{$grid} / #{$grid-number})) - #{$spacing} - .1px);
+                    float: left;
+                    padding: 0 $padding;
+                    box-sizing: border-box;
+                }
+                &.offset-#{$size}#{$grid-number} {
+                    margin-left: calc((100% / (#{$grid} / #{$grid-number})) + (#{$spacing} / 2 )) !important;
+                }
+            }
+        }
+        $grid-number: $grid-number - 1;
+    }
+}
+
+.row{
+    box-sizing: border-box;
+    margin: 0 -#{$spacing / 2};
+    margin-bottom: $spacing / 2;
+    @media #{$small-and-down}{
+        padding:0;
+        margin-bottom: $spacing / 2;
+    }
+    &:before,
+    &:after{
+        content: " ";
+        clear: both;
+        display: table;
+    }
+}
+
+.container{
+    display: table;
+    position: relative;
+    width: 100%;
+    .container{
+        padding: ($padding / 2) 0;
+    }
+}
+
+
+// Media Query Classes
+.hide-on-small-only, .hide-on-small-and-down {
+  @media #{$small-and-down} {
+    display: none !important;
+  }
+}
+.hide-on-med-and-down {
+  @media #{$medium-and-down} {
+    display: none !important;
+  }
+}
+.hide-on-med-and-up {
+  @media #{$medium-and-up} {
+    display: none !important;
+  }
+}
+.hide-on-med-only {
+  @media only screen and (min-width: $small-screen) and (max-width: $medium-screen) {
+    display: none !important;
+  }
+}
+.hide-on-large-only {
+  @media #{$large-and-up} {
+    display: none !important;
+  }
+}
+.show-on-large {
+  @media #{$large-and-up} {
+    display: block !important;
+  }
+}
+.show-on-medium {
+  @media only screen and (min-width: $small-screen) and (max-width: $medium-screen) {
+    display: block !important;
+  }
+}
+.show-on-small {
+  @media #{$small-and-down} {
+    display: block !important;
+  }
+}
+.show-on-medium-and-up {
+  @media #{$medium-and-up} {
+    display: block !important;
+  }
+}
+.show-on-medium-and-down {
+  @media #{$medium-and-down} {
+    display: block !important;
+  }
+}
