@@ -1,327 +1,145 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Marker Clustering</title>
-    <link rel="stylesheet" type="text/css" href="wwwroot/css/tiBorIxD.css">
-    <script type="text/javascript" charset="UTF-8" src="wwwroot/js/tiborIxD.js"></script>
-    <style> 
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #gmap {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .container{
-        height: 600px;
-        margin: 0 auto;
-        max-height: 600px;
-        max-width: 1200px;
-        overflow: hidden;
-        position: relative;
-        width: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="main-container shadow-z5">
-      <div class="logo-container">
-        <img class='logo' src="wwwroot/images/LOCATR_LOGO.png" alt="LOCATR logo">
-      </div>
-      <div class="container card shadow-z1">
-        <div id="leftPanel" class="panel left">
-          <div id="switch" class="icon">
-            <svg id="filter" fill="#000000" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path>
-                <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-            <svg id="close" class="hide" fill="#000000" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-                <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-          </div>
-          <h5>Filter</h5>
 
-          <div id="filterChoices" class="choices">
-              <label class="input-checkbox" for="check1">
-                  <input type="checkbox" id="check1" value="Kantoor" onchange="filter(this);"/>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Marker Clustering</title>
+  <link rel="stylesheet" type="text/css" href="wwwroot/css/tiBorIxD.css">
+  <script type="text/javascript" charset="UTF-8" src="wwwroot/js/tiborIxD.js"></script>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+    #gmap {
+      height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      height: 600px;
+      margin: 0 auto;
+      max-height: 600px;
+      max-width: 1200px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container shadow-z5">
+    <div class="logo-container">
+      <img class='logo' src="wwwroot/images/LOCATR_LOGO.png" alt="LOCATR logo">
+    </div>
+    <div class="container card shadow-z1">
+      <div id="leftPanel" class="panel left">
+        <div id="switch" class="icon">
+          <svg id="filter" fill="#000000" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+          <svg id="close" class="hide" fill="#000000" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+        </div>
+        <h5>Filter</h5>
+
+        <div id="filterChoices" class="choices">
+          <label class="input-checkbox" for="check1">
+                  <input type="checkbox" id="check1" value="Kantoor" onchange="filter();"/>
                   <div class="checkbox"></div>
                   Kantoor
               </label>
-              <label class="input-checkbox" for="check2">
-                  <input type="checkbox" id="check2" value="Verkooppunten" onchange="filter(this);"/>
+          <label class="input-checkbox" for="check2">
+                  <input type="checkbox" id="check2" value="Verkooppunten" onchange="filter();"/>
                   <div class="checkbox"></div>
                   Verkooppunten
               </label>
-              <label class="input-checkbox" for="check3">
-                  <input type="checkbox" id="check3" value="Distributie Centra" onchange="filter(this);"/>
+          <label class="input-checkbox" for="check3">
+                  <input type="checkbox" id="check3" value="Distributie Centra" onchange="filter();"/>
                   <div class="checkbox"></div>
                   Distributie Centra
               </label>
-              <a href="#" class="secondary-action reset" onclick="filter(this);">Reset filters</a>
-          </div>
-          
+          <a href="#" class="secondary-action reset" onclick="filter();">Reset filters</a>
         </div>
-        <div id="gmap" style="background-color:#ececec;"></div>
-        <div id="rightPanel" class="panel location-info right">
-          <div id="switch" class="icon">
-            <svg id="close" fill="#000000" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-                <path d="M0 0h24v24H0z" fill="none"></path>
-            </svg>
-          </div>
+
+      </div>
+      <div id="gmap" style="background-color:#ececec;"></div>
+      <div id="rightPanel" class="panel location-info right">
+        <div id="switch" class="icon">
+          <svg id="close" fill="#000000" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
         </div>
       </div>
     </div>
-    <script>
+  </div>
+  <script>
+    let markers = [];
+    let markerCluster;
+    let map;
 
-      function initMap() {
+    const filter = function () {
+      const selectedFilters = getCheckboxValues('#filterChoices');
+      
+      // gooi alle markers weg
+      markers.forEach(marker => markerCluster.removeMarker(marker));
 
-        var pingPong;
-
-        var map = new google.maps.Map(document.getElementById('gmap'), {
-          zoom: 3,
-          center: {lat: -28.024, lng: 140.887},
-          scrollwheel: false,
-          disableDefaultUI: true,
-          fullscreenControl: true,
-          fullscreenControlOptions: {
-              position: google.maps.ControlPosition.BOTTOM_CENTER
-          },
-          zoomControl: true,
-          zoomControlOptions: {
-              position: google.maps.ControlPosition.BOTTOM_CENTER
-          },
-          styles:
-           [
-            {
-              "elementType": "labels",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.country",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#fffdfc"
-                },
-                {
-                  "visibility": "on"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.land_parcel",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.neighborhood",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road",
-              "elementType": "labels.icon",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "transit",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            }
-          ]
-        });
-
-        var allMarkers = [];
-
-        var markerCluster = markerCluster;
-
-        // var iconImage = 'wwwroot/images/custom_marker.png';
-        var markers = locations.map(function(location, i, markers) {
-          var marker = new google.maps.Marker({
-            position: location,
-            // icon: iconImage,
-            label: location.label,
-            title: location.label,
-            phone: location.phone,
-            mail: location.mail,
-            imageSrc: location.imageSrc,
-            type: location.type
-          });
-          allMarkers.push(marker);
-
-          marker.addListener('click', function() {
-            var b = new Panel('rightPanel', false, marker).open();
-            map.panTo(marker.getPosition());
-          });
-
-          filter = function (element) {
-            var updatedMarkers = [];
-            var updateDatedChoice = [];
-            var allChoice = [];
-
-            var choicesContainer = document.getElementById('filterChoices');
-            var choices = document.querySelectorAll('#' + choicesContainer.id + ' ' + 'input');
-
-            choices.forEach(function(choice, x){
-              allChoice.push(choice);
-
-              var updateDatedChoice = allChoice.filter(function(item){
-                return item.checked == choices[x].checked;
-              });
-
-              if(updateDatedChoice.length == choices.length){
-
-                console.log('no filter active');
-                
-                var updatedMarkers =  allMarkers.filter(function(item){
-                  return item.type = item.type;
-                });
-
-                resetMarkerCluster(updatedMarkers);
-                updatedMarkers = [];
-                
-              } else {
-
-
-                if(choices[x].checked){
-                  console.log('filter(s) active');
-                  var updatedMarkers =  allMarkers.filter(function(item){
-                    return item.type == choices[x].value;
-                  });
-
-                  updateMarkerCluster(updatedMarkers, true);
-                  updatedMarkers = [];
-                } else {
-
-                  var updatedMarkers =  allMarkers.filter(function(item){
-                    return item.type == choices[x].value;
-                  });
-
-                  updateMarkerCluster(updatedMarkers, false);
-                  updatedMarkers = [];
-                }
-              }
-            });
-          }
-          return marker;
-        });
-        
-        var updateMarkerCluster = function (updatedMarkers, bool) {
-          updatedMarkers.forEach(function(markers, i){
-            if(!bool){
-              markers.setMap(null);
-              markerCluster.removeMarker(markers);
-              console.log('ye');
-            } else {
-              markers.setMap(map);
-              markerCluster.addMarker(markers);
-            }
-          });
-        }
-        var resetMarkerCluster = function (updatedMarkers) {
-          updatedMarkers.forEach(function(markers, i){
-            markers.setMap(null);
-            markerCluster.removeMarker(markers);
-            markers.setMap(map);
-            markerCluster.addMarker(markers);
-              console.log('ye');
-          });
-        }
-
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-            
+      // voeg de markers toe
+      if(selectedFilters.length === 0){
+        markers.forEach(marker => markerCluster.addMarker(marker))
+      }else{
+        markers
+          .filter(marker => (selectedFilters.indexOf(marker.type) > -1))
+          .forEach(marker => markerCluster.addMarker(marker))
       }
+    };
 
-      var locations = [
-        {lat: -31.563910, lng: 147.154312, label: 'Alpha', type: 'Kantoor', phone: '020 474 44 23', mail: 'alpha.kantoor@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -33.718234, lng: 150.363181, label: 'Bravo', type: 'Kantoor', phone: '020 374 44 23', mail: 'bravo.kantoor@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -33.727111, lng: 150.371124, label: 'Charlie', type: 'Kantoor', phone: '020 574 44 23', mail: 'charlie.kantoor.mail@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -33.848588, lng: 151.209834, label: 'Delta', type: 'Kantoor', phone: '020 574 44 23', mail: 'delta.kantoor@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -33.851702, lng: 151.216968, label: 'Echo', type: 'Kantoor', phone: '020 674 44 23', mail: 'echo.kantoor@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -34.671264, lng: 150.863657, label: 'Foxtrot', type: 'Verkooppunten', phone: '020 474 44 23', mail: 'foxtrot.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -35.304724, lng: 148.662905, label: 'Golf', type: 'Verkooppunten', phone: '020 874 44 23', mail: 'golf.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -36.817685, lng: 175.699196, label: 'Hotel', type: 'Verkooppunten', phone: '020 474 44 23', mail: 'hotel.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -36.828611, lng: 175.790222, label: 'India', type: 'Verkooppunten', phone: '020 974 44 23', mail: 'india.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -37.750000, lng: 145.116667, label: 'Juliet', type: 'Verkooppunten', phone: '020 474 44 23', mail: 'juliet.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -37.759859, lng: 145.128708, label: 'Kilo', type: 'Verkooppunten', phone: '020 474 44 23', mail: 'kilo.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -37.765015, lng: 145.133858, label: 'Lima', type: 'Verkooppunten', phone: '020 274 44 23', mail: 'lima.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -37.770104, lng: 145.143299, label: 'Mike', type: 'Verkooppunten', phone: '020 474 44 23', mail: 'mike.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -37.773700, lng: 145.145187, label: 'November', type: 'Verkooppunten', phone: '020 674 44 23', mail: 'november.verkoop@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -37.774785, lng: 145.137978, label: 'Oscar', type: 'Distributie Centra', phone: '020 464 44 23', mail: 'oscar.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -37.819616, lng: 144.968119, label: 'Papa', type: 'Distributie Centra', phone: '020 974 44 23', mail: 'papa.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -38.330766, lng: 144.695692, label: 'Quebec', type: 'Distributie Centra', phone: '020 474 44 23', mail: 'quebec.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -39.927193, lng: 175.053218, label: 'Romeo', type: 'Distributie Centra', phone: '020 374 44 23', mail: 'romeo.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -41.330162, lng: 174.865694, label: 'Sierra', type: 'Distributie Centra', phone: '020 474 44 23', mail: 'sierra.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -42.734358, lng: 147.439506, label: 'Tango', type: 'Distributie Centra', phone: '020 374 44 23', mail: 'tango.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -42.734358, lng: 147.501315, label: 'Uniform', type: 'Distributie Centra', phone: '020 474 44 23', mail: 'uniform.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -42.735258, lng: 147.438000, label: 'Victor', type: 'Distributie Centra', phone: '020 274 44 23', mail: 'victor.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'},
-        {lat: -43.999792, lng: 170.463352, label: 'Whiskey', type: 'Distributie Centra', phone: '020 174 44 23', mail: 'whiskey.distributie@mail.nl', imageSrc: 'wwwroot/images/Grzybowska_img3.jpg'}
-      ]
+   
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('gmap'), defaultMapOptions);
 
-    </script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG8tjL4OpYUo3hBLFOwXGvFz7n1Fd25uM&callback=initMap">
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        //SCRIPTS go here
-        var a = new Panel('leftPanel', true);
-        var c = new Checkbox('filterChoices');
+      markers = locations.toMarkers()
+      
+      markers.forEach(marker => {
+        marker.addListener('click', e => {
+          new Panel('rightPanel', false, marker).open();
+          map.panTo(marker.getPosition())
+        })
       });
-    </script>
-  </body>
+
+      // Add a marker clusterer to manage the markers.
+      markerCluster = new MarkerClusterer(map, markers, defaultMarkerOptions);
+    }
+    
+  </script>
+
+  <script defer src="wwwroot/js/locationsDb.js"></script>
+  <script defer src="wwwroot/js/settings.js"></script>
+  <script defer src="wwwroot/js/extensions.js"></script>
+  <script defer src="components/filter/filter.js"></script>
+  <script defer src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG8tjL4OpYUo3hBLFOwXGvFz7n1Fd25uM&callback=initMap"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      //SCRIPTS go here
+      var a = new Panel('leftPanel', true);
+      var c = new Checkbox('filterChoices');
+    });
+  </script>
+
+</body>
+
 </html>
