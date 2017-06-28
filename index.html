@@ -5,6 +5,7 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <title>Marker Clustering</title>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=String.prototype.endsWith,String.prototype.startsWith,Element.prototype.prepend,Element.prototype.append,Array.from,Array.prototype.find,Element.prototype.remove,Promise,fetch,HTMLPictureElement"></script>
   <link rel="stylesheet" type="text/css" href="wwwroot/css/tiBorIxD.css">
   <script type="text/javascript" charset="UTF-8" src="wwwroot/js/tiborIxD.js"></script>
   <style>
@@ -56,21 +57,21 @@
 
         <div id="filterChoices" class="choices">
           <label class="input-checkbox" for="check1">
-                  <input type="checkbox" id="check1" value="Kantoor" onchange="filter();"/>
+                  <input type="checkbox" id="check1" value="Kantoor" onchange="filterLocations();"/>
                   <div class="checkbox"></div>
                   Kantoor
               </label>
           <label class="input-checkbox" for="check2">
-                  <input type="checkbox" id="check2" value="Verkooppunten" onchange="filter();"/>
+                  <input type="checkbox" id="check2" value="Verkooppunten" onchange="filterLocations();"/>
                   <div class="checkbox"></div>
                   Verkooppunten
               </label>
           <label class="input-checkbox" for="check3">
-                  <input type="checkbox" id="check3" value="Distributie Centra" onchange="filter();"/>
+                  <input type="checkbox" id="check3" value="Distributie Centra" onchange="filterLocations();"/>
                   <div class="checkbox"></div>
                   Distributie Centra
               </label>
-          <a href="#" class="secondary-action reset" onclick="filter();">Reset filters</a>
+          <a href="#" class="secondary-action reset" onclick="filterLocations();">Reset filters</a>
         </div>
 
       </div>
@@ -90,7 +91,7 @@
     let markerCluster;
     let map;
 
-    const filter = function () {
+    const filterLocations = function () {
       const selectedFilters = getCheckboxValues('#filterChoices');
       
       // gooi alle markers weg

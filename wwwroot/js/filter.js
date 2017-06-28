@@ -1,12 +1,5 @@
-class Filter{
-    constructor(element){
-        this.addEventListeners();
-    }
-    
-    addEventListeners(){
-    }
-
-    filter(element){
-        // console.log('Filter: ' + element);
-    }
+const getCheckboxValues = function(selector){
+    return Array
+        .from(document.querySelectorAll(selector + ' input:checked'))
+        .map(e => e.value)
 }
