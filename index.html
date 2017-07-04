@@ -5,9 +5,8 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <title>Marker Clustering</title>
-  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=String.prototype.endsWith,String.prototype.startsWith,Element.prototype.prepend,Element.prototype.append,Array.from,Array.prototype.find,Element.prototype.remove,Promise,fetch,HTMLPictureElement"></script>
-  <link rel="stylesheet" type="text/css" href="wwwroot/css/tiBorIxD.css">
-  <script type="text/javascript" charset="UTF-8" src="wwwroot/js/tiborIxD.js"></script>
+  <link rel="stylesheet" type="text/css" href="wwwroot/css/locatr.css">
+  <script type="text/javascript" charset="UTF-8" src="wwwroot/js/locatr.js"></script>
   <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -71,7 +70,7 @@
                   <div class="checkbox"></div>
                   Distributie Centra
               </label>
-          <a href="#" class="secondary-action reset" onclick="filterLocations();">Reset filters</a>
+          <a href="#" class="secondary-action reset">Reset filters</a>
         </div>
 
       </div>
@@ -92,19 +91,19 @@
     let map;
 
     const filterLocations = function () {
-      const selectedFilters = getCheckboxValues('#filterChoices');
-      
-      // gooi alle markers weg
-      markers.forEach(marker => markerCluster.removeMarker(marker));
+        const selectedFilters = getCheckboxValues('#filterChoices');
 
-      // voeg de markers toe
-      if(selectedFilters.length === 0){
-        markers.forEach(marker => markerCluster.addMarker(marker))
-      }else{
-        markers
-          .filter(marker => (selectedFilters.indexOf(marker.type) > -1))
-          .forEach(marker => markerCluster.addMarker(marker))
-      }
+        // gooi alle markers weg
+        markers.forEach(marker => markerCluster.removeMarker(marker));
+
+        // voeg de markers toe
+        if(selectedFilters.length === 0){
+            markers.forEach(marker => markerCluster.addMarker(marker))
+        }else{
+            markers
+                .filter(marker => (selectedFilters.indexOf(marker.type) > -1))
+                .forEach(marker => markerCluster.addMarker(marker))
+        }
     };
 
    
@@ -123,7 +122,7 @@
       // Add a marker clusterer to manage the markers.
       markerCluster = new MarkerClusterer(map, markers, defaultMarkerOptions);
     }
-    
+
   </script>
 
   <script defer src="wwwroot/js/locationsDb.js"></script>

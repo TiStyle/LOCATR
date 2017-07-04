@@ -15,6 +15,7 @@ class Checkbox{
         this.choicesElements.forEach(function(element) {
             if(element.checked){
                 element.checked = false;
+                filterLocations();
             }
         }, this);
     }
