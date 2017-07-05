@@ -1,7 +1,7 @@
  const convertLocationToMarker = function (location){
     return new google.maps.Marker({
         position: location,
-        label: location.label,
+        // label: location.label,
         title: location.label,
         phone: location.phone,
         mail: location.mail,
